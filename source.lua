@@ -17,10 +17,7 @@ local module = {
 			local UIListLayout = Instance.new("UIListLayout")
 			local cmd = Instance.new("Frame")
 			local TextLabel = Instance.new("TextLabel")
-			cmdBarV = cmdBar
-			autoBarV = auto
-			template = cmd
-			scrollFrame = cmdHistory
+
 			robloxxser.Name = "robloxxser"
 			robloxxser.Parent = game.CoreGui
 			robloxxser.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -101,6 +98,10 @@ local module = {
 			TextLabel.TextScaled = true
 			TextLabel.TextSize = 14.000
 			TextLabel.TextWrapped = true
+						cmdBarV = cmdBar
+			autoBarV = auto
+			template = cmd
+			scrollFrame = cmdHistory
 		else
 			warn("UI Already exists! - Peppermints CMD module maker")
 		end
