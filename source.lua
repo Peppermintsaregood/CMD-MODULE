@@ -2,6 +2,7 @@ local cmdBarV = nil
 local autoBarV = nil
 local template = nil
 local scrollFrame = nil
+local mAIN = nil
 local existing = false
 local cmds = {}
 local m = {
@@ -17,11 +18,11 @@ local m = {
 			local UIListLayout = Instance.new("UIListLayout")
 			local cmd = Instance.new("Frame")
 			local TextLabel = Instance.new("TextLabel")
-
+		
 			robloxxser.Name = "robloxxser"
 			robloxxser.Parent = game.CoreGui
 			robloxxser.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
+			
 			Frame.Parent = robloxxser
 			Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 			Frame.BackgroundTransparency = 0.100
@@ -87,7 +88,7 @@ local m = {
 			cmd.BorderSizePixel = 0
 			cmd.Size = UDim2.new(1, 0, 0.128205121, 0)
 			cmd.Visible = false
-
+			mAIN = robloxxser
 			TextLabel.Parent = cmd
 			TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			TextLabel.BackgroundTransparency = 1.000
@@ -106,6 +107,9 @@ local m = {
 		end
 
 	end,
+	killUI = function()
+	mAIN:Remove()
+	end
 	addHistory = function(text : string)
 		if existing == true then
 
