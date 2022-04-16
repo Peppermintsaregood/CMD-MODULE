@@ -45,8 +45,7 @@ local m = {
 			cmdBar_2.Size = UDim2.new(1, 0, 1, 0)
 			cmdBar_2.ZIndex = 2000
 			cmdBar_2.Font = Enum.Font.Roboto
-			cmdBar_2.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
-			cmdBar_2.PlaceholderText = ";cmds"
+
 			cmdBar_2.Text = ""
 			cmdBar_2.TextColor3 = Color3.fromRGB(179, 179, 179)
 			cmdBar_2.TextScaled = true
@@ -98,7 +97,7 @@ local m = {
 			TextLabel.TextScaled = true
 			TextLabel.TextSize = 14.000
 			TextLabel.TextWrapped = true
-						cmdBarV = cmdBar
+						cmdBarV = cmdBar_2
 			autoBarV = auto
 			template = cmd
 			scrollFrame = cmdHistory
@@ -129,36 +128,46 @@ local m = {
 	end,
 	start = function()
 		if existing == true then
+		    spawn(function()
 			cmdBarV:GetPropertyChangedSignal("Text"):Connect(function() -- autocomplete
 				local text = string.lower(cmdBarV.Text)
+				local found = false
 				for v, i in pairs(cmds) do
 					local returned = string.lower(i(true))
 					if string.find(returned, text) then
 						-- found the cmd so autocomplete
 						autoBarV.Text = returned
+						found = true
 					end
 				end
+				if cmdBarV.Text == "" then
+				     autoBarV.Text = ""
+				end
+				if found == false then
+				    autoBarV.Text = ""
+				end
+			end)
 			end)
 			game:GetService("UserInputService").InputBegan:Connect(function(input)
 				if input.KeyCode == Enum.KeyCode.Semicolon then
 					cmdBarV:CaptureFocus()
-				elseif input.KeyCode == Enum.KeyCode.KeypadEnter and cmdBarV.Focused == true then
+				elseif input.KeyCode == Enum.KeyCode.Return then
+				     autoBarV.Text = ""
+				     
+				     print("enter")
 					for v, i in pairs(cmds) do
 						local returned = string.lower(i(true))
+						print(returned, cmdBarV.Text)
 						if returned == cmdBarV.Text then
+						    print("foundededed")
 							i(false)
 						end
 					end
+					wait(0.05)
+					cmdBarV.Text = ""
 					cmdBarV:ReleaseFocus()
 				end
 			end)
 		end
 	end,
 }
-m.createGui()
-wait(.1)
-m.addCmd(";yes", function()
-    m.addHistory("YES")
-end)
-wait(0.1)
-m.start()
