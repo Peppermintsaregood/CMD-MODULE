@@ -109,7 +109,7 @@ local m = {
 	end,
 	killUI = function()
 	mAIN:Remove()
-	end
+	end,
 	addHistory = function(text : string)
 		if existing == true then
 
