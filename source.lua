@@ -157,10 +157,10 @@ local m = {
 				     print("enter")
 					for v, i in pairs(cmds) do
 						local returned = string.lower(i(true))
+						local arguments = string.split(cmdBarV.Text, " ")
 						print(returned, cmdBarV.Text)
-						if returned == cmdBarV.Text then
+						if returned == arguments[1] then
 						    print("foundededed")
-							local arguments = string.split(cmdBarV.Text, " ")
 							table.remove(arguments, 1)
 							i(false, arguments)
 						end
