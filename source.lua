@@ -4,7 +4,7 @@ local template = nil
 local scrollFrame = nil
 local existing = false
 local cmds = {}
-local module = {
+local m = {
 	createGui = function()
 		if existing == false then
 			existing = true
@@ -127,7 +127,7 @@ local module = {
 			end
 		end
 	end,
-	startAuto = function()
+	start = function()
 		if existing == true then
 			cmdBarV:GetPropertyChangedSignal("Text"):Connect(function() -- autocomplete
 				local text = string.lower(cmdBarV.Text)
@@ -155,5 +155,10 @@ local module = {
 		end
 	end,
 }
-
-return module
+m.createGui()
+wait(.1)
+m.addCmd(";yes", function()
+    m.addHistory("YES")
+end)
+wait(0.1)
+m.start()
