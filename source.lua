@@ -160,7 +160,9 @@ local m = {
 						print(returned, cmdBarV.Text)
 						if returned == cmdBarV.Text then
 						    print("foundededed")
-							i(false)
+							local arguments = string.split(cmdBarV.Text, " ")
+							table.remove(arguments, 1)
+							i(false, arguments)
 						end
 					end
 					wait(0.05)
