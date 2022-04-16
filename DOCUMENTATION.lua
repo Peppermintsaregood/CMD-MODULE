@@ -3,7 +3,7 @@
 --addCmd(text, function) -- adds a cmd to the cmd table, and runs the function given when cmd called
 --start() -- starts all functions(run at end)
 -- example
-local module = require(9383615849) -- call the module
+local module = loadstring(game:HttpGet("https://raw.githubusercontent.com/Peppermintsaregood/CMD-MODULE/main/source.lua"))() -- call the module
 module.createGui()
 module.addHistory("gui launched!")
 module.addCmd(";yes", function()
